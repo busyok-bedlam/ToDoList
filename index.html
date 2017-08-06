@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="style.css">
+
+
+</head>
+<body>
+	<div class="container">
+		<div class="page-header">
+ 			 <h1>To do list <small>with jq</small></h1>
+		</div>
+		<div class="row"l>
+			
+			<div class="col-xs-12">
+				<div class="pull-right">
+				<button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target="#formAddTask">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add new task</button>
+				<button type="button" id="remove-all-task" class="btn btn-danger pull-rigth">
+				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Remove all</button>
+				</div>
+			</div>
+			
+		</div>
+		<!-- Nav tabs -->
+			<ul class="nav nav-tabs" role="tablist">
+			  <li class="nav-item active">
+			    <a class="nav-link " data-toggle="tab" href="#todo" role="tab">Todo</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" data-toggle="tab" href="#progress" role="tab">In progress</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" data-toggle="tab" href="#done" role="tab">Done</a>
+			  </li>
+			  
+			</ul>
+
+			<!-- Tab panes -->
+			<div class="tab-content">
+			  <div class="tab-pane active" id="todo"  data-status="1" role="tabpanel">
+				<ul class="list-group">
+					<!-- <li class="list-group-item"></li> -->
+				</ul>
+			  </div>
+			  <div class="tab-pane" id="progress" data-status="2" role="tabpanel">
+			  	<ul class="list-group">
+						<!-- <li class="list-group-item"></li> -->
+				</ul>
+			</div>
+			  <div class="tab-pane" id="done" data-status="3" role="tabpanel">
+				<ul class="list-group">
+					<!-- <li class="list-group-item"></li> -->
+				</ul>
+			  </div>
+			</div>
+
+	</div>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-md-4">
+
+			<div class="panel panel-danger">
+				 <div class="panel-heading">
+				  	<h3 class="panel-title">Should be done</h3>
+				  </div>
+				  <div class="panel-body">
+				    Task count<span class="badge" badge-status="1">0</span>
+				  </div>
+		   </div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="panel panel-warning">
+
+				 <div class="panel-heading">
+				  	<h3 class="panel-title">Will be done soon</h3>
+				  </div>
+				  <div class="panel-body">
+				    Task count<span class="badge" badge-status="2">0</span>
+				  </div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="panel panel-success">
+
+				 <div class="panel-heading">
+				  	<h3 class="panel-title">Already done</h3>
+				  </div>
+				  <div class="panel-body">
+				   Task count<span class="badge"  badge-status="3">0</span>
+				  </div>
+			</div>
+		</div>
+	</div>
+</div>
+		<!-- Button trigger modal -->
+	
+		<!-- Modal -->
+		<div class="modal fade" id="formAddTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+
+		      <div class="modal-body">
+		        <!-- $formAddTask -->
+
+		        <form>
+				  <div class="form-group">
+				    <input type="text" name="title" class="form-control"  placeholder="Title">
+				  </div>
+				</form>	
+				<!-- $formAddTask -->
+		      </div>
+
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+		        <button type="button" class="btn btn-success" 
+		        id='btn-add-task'>Save</button>
+		      </div>
+
+		</div>
+	</div>
+</div>
+
+<!--                               -->
+	
+		 <div class="modal fade" id="formEditTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+
+		      <div class="modal-body">
+		        <!-- $formAddTask -->
+
+		        <form>
+		        	<input type="hidden" name="key">
+				  <div class="form-group">
+
+				    <input type="text" name="title" class="form-control"  placeholder="Title">
+				  </div>
+				  <div class="form-group">
+				  <label>Status</label>
+				   <select name="status" class="form-control">
+				   		<option value="1">to do</option>
+				   		<option value="2">In progress</option>
+				   		<option value="3">Done</option>
+				   </select>
+				  </div>
+				</form>	
+				<!-- $formAddTask -->
+		      </div>
+
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+		        <button type="button" class="btn btn-success" id='btnEditTask'>save</button>
+		      </div>
+
+		    </div>
+		  </div>
+		</div>
+
+
+
+
+
+
+
+
+
+<script src='lib/jquery/dist/jquery.min.js'></script>
+<script src = 'lib/bootstrap/dist/js/bootstrap.min.js'></script>
+<script src="js/main.js"></script>
+</body>
+</html>
